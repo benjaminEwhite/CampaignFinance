@@ -29,7 +29,7 @@ export default function candidate() {
                         <p class='candidate-prop'><span class='candidate-prop-label'>Associated Candidate PAC:</span> Cooper for North Carolina</p>
                     </Grid>
                     <Grid col>
-                        <h1 class='total-funding'>$234,138.53</h1>
+                        <p class='total-funding'>$234,138.53</p>
                         <p class='total-funding-tooltip'>Total Funding</p>
                     </Grid>
                 </Grid>
