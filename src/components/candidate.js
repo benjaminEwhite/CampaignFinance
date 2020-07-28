@@ -23,18 +23,14 @@ export default function candidate() {
                 <Grid row>
                     <Grid col>
                         <h1 class='candidate-name'>Roy Cooper</h1>
-                        <span class='candidate-party'>Democrat</span>
+                        <p class='candidate-party'>Democrat</p>
+                        <p class='candidate-prop'><span class='candidate-prop-label'>Current Office:</span> Governor</p>
+                        <p class='candidate-prop'><span class='candidate-prop-label'>Last Contest:</span> <a href='#'>Gubernatorial Election 2020</a></p>
+                        <p class='candidate-prop'><span class='candidate-prop-label'>Associated Candidate PAC:</span> Cooper for North Carolina</p>
                     </Grid>
                     <Grid col>
                         <h1 class='total-funding'>$234,138.53</h1>
                         <p class='total-funding-tooltip'>Total Funding</p>
-                    </Grid>
-                </Grid>
-                <Grid row>
-                    <Grid col>
-                        <p class='candidate-prop'><span class='candidate-prop-label'>Current Office:</span> Governor</p>
-                        <p class='candidate-prop'><span class='candidate-prop-label'>Last Contest:</span> <a href='#'>Gubernatorial Election 2020</a></p>
-                        <p class='candidate-prop'><span class='candidate-prop-label'>Associated Candidate PAC:</span> Cooper for North Carolina</p>
                     </Grid>
                 </Grid>
                 <Grid row>
