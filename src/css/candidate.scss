@@ -1,3 +1,9 @@
+.container {
+  background-color: lighten($color: gainsboro, $amount: 8);
+  padding-top: 50px;
+  margin-top: 0;
+}
+
 .candidate-name {
   margin: auto;
 }
@@ -15,7 +21,7 @@
 }
 
 .total-funding {
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: bold;
   text-align: right;
   margin: auto;

@@ -8,7 +8,7 @@ import '../css/candidate.scss';
 
 export default function candidate() {
     return (
-        <div>
+        <div className='container'>
             <GridContainer>
                 <Grid row>
                     <Grid col>
