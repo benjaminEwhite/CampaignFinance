@@ -1,5 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const { sql } = require('slonik')
+
 const { searchContributors, searchCommittees } = require('./lib/search')
 const { getClient } = require('./db')
 const app = express()
@@ -113,6 +115,48 @@ api.get('/contributors/:contributorId/contributions', async (req, res) => {
       data: contributions.rows,
       count:
         contributions.rows.length > 0 ? contributions.rows[0].full_count : 0,
+    })
+  } catch (error) {
+    handleError(error, res)
+  } finally {
+    if (client !== null) {
+      client.release()
+    }
+  }
+})
+
+api.get('/zipcodes/contributions', async (req, res) => {
+  let client = null
+  try {
+    const { year, name } = req.query
+    const decodedName = decodeURIComponent(name)
+    client = await getClient()
+
+    const booleanExpressions = [sql`TRUE`]
+    if (year !== undefined) {
+      booleanExpressions.push(
+        sql`date_part('year', to_date(contributions.date_occurred, 'MM/DD/YY')) = ${year}`
+      )
+    }
+    const whereSqlToken = sql.join(booleanExpressions, 'AND')
+
+    let query = `
+      select
+        substr(contributors.zip_code, 1, 5) as zipcode,
+        sum(contributions.amount) as dollars_contributed,
+        count(contributions)::integer as number_of_contributions,
+        round(sum(contributions.amount)/count(contributions)) as average_contribution_amount
+      from contributors
+      inner join contributions
+      on contributors.id = contributions.contributor_id
+      where ${whereSqlToken}
+      group by zipcode
+      order by zipcode
+    `
+    console.log(query)
+    const zipsByContributions = await client.query(query)
+    return res.send({
+      data: zipsByContributions.rows,
     })
   } catch (error) {
     handleError(error, res)
