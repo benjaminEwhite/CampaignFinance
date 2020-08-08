@@ -128,9 +128,21 @@ api.get('/contributors/:contributorId/contributions', async (req, res) => {
 api.get('/zipcodes/contributions', async (req, res) => {
   let client = null
   try {
-    const { year, name } = req.query
+    const { year, candidateName, office, committeeName } = req.query
     const decodedName = decodeURIComponent(name)
+    const decodedCandName = decodeURIComponent(candidateName)
+    const decodedOffice = decodeURIComponent(office)
+    const decodedCommName = decodeURIComponent(committeeName)
     client = await getClient()
+
+    const conditions = ['TRUE'][
+      // eslint-disable-next-line no-sequences
+      (year, name)
+    ].forEach((item) => {
+      if (item !== undefined) {
+        conditions.push(item)
+      }
+    })
 
     const booleanExpressions = [sql`TRUE`]
     if (year !== undefined) {
